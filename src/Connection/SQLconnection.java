@@ -13,21 +13,13 @@ import java.sql.*;
 public class SQLconnection {
     
     public static Connection getConnection() {
-        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=QuanLyThuVien";
+        String url = "jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=QuanLyThuVien2";
         String userName = "sa";
         String password = "blackace71202";
     
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             return DriverManager.getConnection(url, userName, password);
-//            java.sql.Connection connection =DriverManager.getConnection(url,userName,password);
-//            System.out.println("Thanh cong");
-            //--------------
-//            java.sql.Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from NguoiDung");
-//            while(rs.next()){
-//                System.out.println("\t"+rs.getInt(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getString(5)+"\t"+rs.getString(6)+"\t"+rs.getString(7));
-//            }
         }
         catch(ClassNotFoundException e){
             e.printStackTrace();

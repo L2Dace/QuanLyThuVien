@@ -45,5 +45,13 @@ public class Services {
     public void addBao(bao Bao){
         baoLink.addBao(Bao);
     }
-    
+    public void deleteSach(String maTaiLieu){
+        sachLink.deleteSach(maTaiLieu);
+    }
+    public void deleteTapChi(String maTaiLieu){
+        sachLink.deleteTapChi(maTaiLieu);
+    }
+    public void deleteBao(String maTaiLieu){
+        sachLink.deleteBao(maTaiLieu);
+    }
 }

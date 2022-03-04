@@ -27,6 +27,7 @@ public class LibraryView extends javax.swing.JFrame {
         initComponents();
         DataSach();
     }
+    
     public void DataSach(){
         Services = new Services();
         defaultTableModel = new DefaultTableModel();
@@ -86,6 +87,25 @@ public class LibraryView extends javax.swing.JFrame {
         {
             defaultTableModel.addRow(new Object[]{i.getMaTaiLieu(), i.getTenNXB(), i.getSoBanPhatHanh()
             ,i.getNgayPhatHanh()});
+        }
+    }
+    
+    public LibraryView(String x){
+        initComponents();
+        if(x.length()>4)
+        {
+            if (x.substring(0,2).equals("SA")) 
+            {
+                DataSach();
+            }
+            if (x.substring(0,2).equals("TC"))
+            {
+                DataTapChi();
+            }
+            if (x.substring(0,2).equals("BA"))
+            {
+               DataBao();
+            }
         }
     }
     /**
@@ -191,6 +211,11 @@ public class LibraryView extends javax.swing.JFrame {
         deleteButton.setBackground(new java.awt.Color(255, 153, 153));
         deleteButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         deleteButton.setText("Xóa");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(deleteButton);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,6 +274,32 @@ public class LibraryView extends javax.swing.JFrame {
         new AddItem().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int row = tableOfContents.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(LibraryView.this, "Chưa chọn Tài Liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(LibraryView.this, "Chắc chắn xóa tài liệu này?");
+            String maTaiLieu = String.valueOf(tableOfContents.getValueAt(row, 0));
+            if (confirm == JOptionPane.YES_OPTION && maTaiLieu.substring(0, 2).equals("SA")){
+                Services.deleteSach(maTaiLieu);
+                defaultTableModel.setRowCount(0);
+                DataSach();
+            }
+            if (confirm == JOptionPane.YES_OPTION && maTaiLieu.substring(0, 2).equals("TC")){
+                Services.deleteTapChi(maTaiLieu);
+                defaultTableModel.setRowCount(0);
+                DataTapChi();
+            }
+            if (confirm == JOptionPane.YES_OPTION && maTaiLieu.substring(0, 2).equals("BA")){
+                Services.deleteBao(maTaiLieu);
+                defaultTableModel.setRowCount(0);
+                DataBao();
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
